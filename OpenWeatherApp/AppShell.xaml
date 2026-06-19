@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="OpenWeatherApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:OpenWeatherApp"
+    xmlns:views ="clr-namespace:OpenWeatherApp.Views"
+    Title="OpenWeatherApp">
+    <TabBar>
+        <Tab
+            Title="Home">
+            <ShellContent
+                ContentTemplate="{DataTemplate views:HomePage}"
+                Route="HomePage" />
+        </Tab>
+        <Tab
+            Title="Search">
+            <ShellContent
+                ContentTemplate="{DataTemplate views:SearchCitiesPage}"
+                Route="SearchCitiesPage" />
+        </Tab>
+        <Tab
+            Title="FavouriteCities">
+            <ShellContent
+                ContentTemplate="{DataTemplate views:FavouriteCitiesPage}"
+                Route="FavouriteCitiesPage" />
+        </Tab>
+        <Tab
+            Title="Settings">
+            <ShellContent
+                ContentTemplate="{DataTemplate views:SettingsPage}"
+                Route="SettingsPage" />
+        </Tab>
+    </TabBar>
+
+
+</Shell>
