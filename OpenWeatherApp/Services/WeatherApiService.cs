@@ -26,11 +26,11 @@ namespace OpenWeatherApp.Services
         }
 
         // Get weather details using user's typed city
-        public async Task<List<DailyWeather>> GetWeatherSearchResults(string cityName, WeatherApiService service, Geocode cityGeocode)
+        public async Task<DailyWeather> GetWeatherSearchResults(string cityName, WeatherApiService service, Geocode cityGeocode)
         {
             string requestUrl = service.weatherApiUrl + "data/4.0/onecall/timeline/" + "1day" + "?lat=" + cityGeocode.lat + "&lon=" + cityGeocode.lon + "&units=" + service.temperatureUnit + "&appid=" + service.weatherApiKey;
             var response = await MakeRestRequest(requestUrl);
-            List<DailyWeather>? weather = JsonConvert.DeserializeObject<List<DailyWeather>>(response);
+            DailyWeather? weather = JsonConvert.DeserializeObject<DailyWeather>(response);
             return weather;
         }
 

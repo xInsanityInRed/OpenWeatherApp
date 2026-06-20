@@ -7,8 +7,7 @@ namespace OpenWeatherApp.Views;
 public partial class SearchCitiesPage : ContentPage
 {
 	public List<Geocode> place;
-    public List<DailyWeather> weatherResult;
-    Dictionary<string, string> customWeather;
+    DailyWeather weatherResult;
     public int searchLimit = 5;
     public SearchCitiesPage()
 	{
@@ -27,27 +26,26 @@ public partial class SearchCitiesPage : ContentPage
         
         place = await service.TranslateCityToGeocode(searchBar.Text, service);
         weatherResult = await service.GetWeatherSearchResults(searchBar.Text, service, place[0]);
-        List<Dictionary<string, string>> myList = new(); 
+        List<Data> listOfWeatherResults = new();
 
         if (weatherResult != null && place != null)
         {
-            for (int i = 0; i < 1; i++)
-            {
-                if (weatherResult[0].data != null)
-                {
 
-                }
-            }
-            customWeather = new Dictionary<string, string> {
+            /*customWeather = new Dictionary<string, string> {
                 {"nameOfCity", place[0].name},
                 {"nameOfCountry", place[0].country},
                 {"nameOfState", place[0].state },
-                {"actualDaytimeTemp", weatherResult[0].temp.day.ToString()},
-                {"actualMinTemp", weatherResult[0].temp.min.ToString()},
-                {"actualMaxTemp", weatherResult[0].temp.max.ToString()},
-                {"feelsLikeDaytimeTemp", weatherResult[0].feels_like.day.ToString()}
-            };
+                {"actualDaytimeTemp", weatherResult.data[0].temp.day.ToString()},
+                {"actualMinTemp", weatherResult.data[0].temp.min.ToString()},
+                {"actualMaxTemp", weatherResult.data[0].temp.max.ToString()},
+                {"feelsLikeDaytimeTemp", weatherResult.data[0].feels_like.day.ToString()}
+            };*/
+            foreach (var result in weatherResult.data)
+            {
+                listOfWeatherResults.Add(result);
+            }
+            CityCollectionSearchResults.ItemsSource = listOfWeatherResults;
         }
-        CityCollectionSearchResults.ItemsSource = customWeather;
+        
     }
 }

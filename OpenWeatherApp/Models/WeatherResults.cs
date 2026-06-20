@@ -8,12 +8,12 @@ namespace OpenWeatherApp.Models
     /// <summary>
     /// Weather results to display in application.
     /// </summary>
-    public class WeatherResults
+    public class WeatherResults : DailyWeather
     {
         public string cityName { get; set; }
         public string country { get; set; }
         public string state { get; set; }
-        public Temperature temp { get; set; }
+        /*public Temperature temp { get; set; }
         public Feels_Like feels_like { get; set; }
 
         public class Temperature
@@ -41,6 +41,6 @@ namespace OpenWeatherApp.Models
             this.state = state;
             this.temp = temp;
             this.feels_like = feels_like;
-        }
+        }*/
     }
 }
