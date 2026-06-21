@@ -7,7 +7,7 @@ namespace OpenWeatherApp.Views;
 public partial class SearchCitiesPage : ContentPage
 {
 	public List<Geocode> place;
-    DailyWeather weatherResult;
+    CurrentWeather weatherResult;
     public int searchLimit = 5;
     public SearchCitiesPage()
 	{
@@ -26,7 +26,7 @@ public partial class SearchCitiesPage : ContentPage
         
         place = await service.TranslateCityToGeocode(searchBar.Text, service);
         weatherResult = await service.GetWeatherSearchResults(searchBar.Text, service, place[0]);
-        List<Data> listOfWeatherResults = new();
+        List<CurrentWeatherData> listOfWeatherResults = new();
 
         if (weatherResult != null && place != null)
         {

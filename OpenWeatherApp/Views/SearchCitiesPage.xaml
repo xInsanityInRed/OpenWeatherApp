@@ -20,11 +20,8 @@
                     <DataTemplate>
                         <StackLayout>
                             <Label Text="Temperature today" FontAttributes="Bold" FontSize="20"/>
-                            <Label Text="{Binding temp.day}" FontAttributes="Bold" FontSize="32"/>
-                            <Label Text="{Binding temp.day}" FontAttributes="Bold" FontSize="20"/>
-                            <Label Text="{Binding temp.min}" FontAttributes="Bold" FontSize="20"/>
-                            <Label Text="{Binding temp.max}" FontAttributes="Bold" FontSize="20"/>
-                            <Label Text="{Binding feels_like.day}" FontAttributes="Bold" FontSize="20"/>
+                            <Label Text="{Binding temp}" FontAttributes="Bold" FontSize="32"/>
+                            <Label Text="{Binding feels_like}" FontAttributes="Bold" FontSize="20"/>
                             <Label Text="{Binding dt}" FontAttributes="Bold" FontSize="20"/>
                         </StackLayout>
                     </DataTemplate>
