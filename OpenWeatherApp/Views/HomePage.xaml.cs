@@ -6,4 +6,9 @@ public partial class HomePage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private void RefreshDataButton_Clicked(object sender, EventArgs e)
+    {
+
+    }
 }
