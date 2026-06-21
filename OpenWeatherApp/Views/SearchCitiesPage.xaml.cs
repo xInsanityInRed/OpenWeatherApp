@@ -26,8 +26,9 @@ public partial class SearchCitiesPage : ContentPage
         WeatherApiService service = new WeatherApiService("b3aa72c0e805f0c66fae53311f9f0d47", "https://api.openweathermap.org/", "metric");
         
         place = await service.TranslateCityToGeocode(searchBar.Text, service);
-        weatherResult = await service.GetWeatherSearchResults(searchBar.Text, service, place[0]);
-        List<Dictionary<string, string>> myList = new(); 
+
+        weatherResult = await service.SearchDailyWeather(searchBar.Text, service, place[0]);
+        List<DailyWeather.Data> listOfWeatherResults = new();
 
         if (weatherResult != null && place != null)
         {
