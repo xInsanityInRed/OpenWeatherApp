@@ -9,5 +9,9 @@ namespace OpenWeatherApp.Services
     /// </summary>
     internal class UnixToUtcConverter
     {
+        public DateTime ToDateTime(int unixTime)
+        {
+            return new DateTime(1970, 1, 1).Add(TimeSpan.FromSeconds(unixTime));
+        }
     }
 }
