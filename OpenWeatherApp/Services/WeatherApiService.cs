@@ -25,12 +25,12 @@ namespace OpenWeatherApp.Services
             //this.weatherTimeframe = timeframe;
         }
 
-        // Get weather details of city for 10 days from today onwards
-        public async Task<DailyWeather> SearchDailyWeather(string cityName, WeatherApiService service, Geocode cityGeocode)
+        // Get weather details using user's typed city
+        public async Task<CurrentWeather> GetWeatherSearchResults(string cityName, WeatherApiService service, Geocode cityGeocode)
         {
-            string requestUrl = service.weatherApiUrl + "data/4.0/onecall/timeline/" + "1day" + "?lat=" + cityGeocode.lat + "&lon=" + cityGeocode.lon + "&units=" + service.temperatureUnit + "&appid=" + service.weatherApiKey;
+            string requestUrl = service.weatherApiUrl + "data/4.0/onecall/" + "current" + "?lat=" + cityGeocode.lat + "&lon=" + cityGeocode.lon + "&units=" + service.temperatureUnit + "&appid=" + service.weatherApiKey;
             var response = await MakeRestRequest(requestUrl);
-            DailyWeather? weather = JsonConvert.DeserializeObject<DailyWeather>(response);
+            CurrentWeather? weather = JsonConvert.DeserializeObject<CurrentWeather>(response);
             return weather;
         }
 
