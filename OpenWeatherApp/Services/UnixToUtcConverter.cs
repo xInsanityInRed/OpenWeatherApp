@@ -9,6 +9,12 @@ namespace OpenWeatherApp.Services
     /// </summary>
     internal class UnixToUtcConverter
     {
+        public string ToHourOfTheDayOnly(int unixTime, int timeOffset)
+        {
+            var newDateTime = new DateTime(1970, 1, 1).Add(TimeSpan.FromSeconds(unixTime + timeOffset));
+            string formattedDateTime = newDateTime.ToString("HH");
+            return formattedDateTime;
+        }
         public string ToTimeOnly(int unixTime, int timeOffset)
         {
             var newDateTime = new DateTime(1970, 1, 1).Add(TimeSpan.FromSeconds(unixTime + timeOffset));
