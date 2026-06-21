@@ -14,6 +14,7 @@ namespace OpenWeatherApp.Models
     }
     public class CurrentWeatherData
     {
+        public string dateTime { get; set; }
         public int dt { get; set; }
         public int sunrise { get; set; }
         public int sunset { get; set; }
