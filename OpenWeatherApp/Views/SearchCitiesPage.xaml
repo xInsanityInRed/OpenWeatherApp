@@ -18,12 +18,47 @@
             <CollectionView x:Name="CityCollectionSearchResults">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout>
-                            <Label Text="Temperature today" FontAttributes="Bold" FontSize="20"/>
-                            <Label Text="{Binding temp}" FontAttributes="Bold" FontSize="32"/>
-                            <Label Text="{Binding feels_like}" FontAttributes="Bold" FontSize="20"/>
-                            <Label Text="{Binding dt}" FontAttributes="Bold" FontSize="20"/>
-                        </StackLayout>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Image
+                                x:Name="weatherIcon"
+                                Source="dotnet_bot.png"
+                                Grid.RowSpan="3"
+                                MaximumHeightRequest="50"
+                                Margin="5">
+                            </Image>
+                            <Label
+                                Grid.Column="1"
+                                Grid.Row="0"
+                                Text="Temperature today: "
+                                FontAttributes="Bold"
+                                FontSize="20"/>
+                            <Label
+                                Grid.Column="2"
+                                Grid.Row="0"
+                                Text="{Binding temp}"
+                                FontAttributes="Bold"
+                                FontSize="20"/>
+                            <Label
+                                Grid.Column="1"
+                                Grid.Row="1"
+                                Text="{Binding feels_like}"
+                                FontSize="20"/>
+                            <Label
+                                Grid.Column="1"
+                                Grid.Row="2"
+                                Text="{Binding dt}"
+                                FontSize="20"/>
+                        </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

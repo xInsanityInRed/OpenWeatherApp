@@ -1,4 +1,3 @@
-//using Android.App.AppSearch;
 using OpenWeatherApp.Models;
 using OpenWeatherApp.Services;
 
@@ -27,7 +26,7 @@ public partial class SearchCitiesPage : ContentPage
         place = await service.TranslateCityToGeocode(searchBar.Text, service);
         weatherResult = await service.GetWeatherSearchResults(searchBar.Text, service, place[0]);
         List<CurrentWeatherData> listOfWeatherResults = new();
-
+        
         if (weatherResult != null && place != null)
         {
 
@@ -46,6 +45,5 @@ public partial class SearchCitiesPage : ContentPage
             }
             CityCollectionSearchResults.ItemsSource = listOfWeatherResults;
         }
-        
     }
 }
