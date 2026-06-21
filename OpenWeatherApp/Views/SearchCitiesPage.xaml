@@ -31,7 +31,7 @@
                             </Grid.ColumnDefinitions>
                             <Image
                                 x:Name="weatherIcon"
-                                Source="dotnet_bot.png"
+                                Source="{Binding weather[0].icon}"
                                 Grid.RowSpan="3"
                                 MaximumHeightRequest="50"
                                 Margin="5">

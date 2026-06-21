@@ -26,6 +26,7 @@ public partial class SearchCitiesPage : ContentPage
         place = await service.TranslateCityToGeocode(searchBar.Text, service);
         weatherResult = await service.GetWeatherSearchResults(searchBar.Text, service, place[0]);
         List<CurrentWeatherData> listOfWeatherResults = new();
+        weatherResult.data[0].weather[0].icon = $"{weatherResult.data[0].weather[0].icon}.png";
         
         if (weatherResult != null && place != null)
         {
