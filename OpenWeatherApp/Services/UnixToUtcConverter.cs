@@ -5,10 +5,30 @@ using System.Text;
 namespace OpenWeatherApp.Services
 {
     /// <summary>
-    /// Converts Unix timestamps to UTC time, and vice versa. Used for processing the timestamps included in the OpenWeather Map API response, which are in Unix format.
+    /// Converts Unix timestamps from API to UTC time, date, day of the week and datetime.
     /// </summary>
     internal class UnixToUtcConverter
     {
+        public string ToTimeOnly(int unixTime, int timeOffset)
+        {
+            var newDateTime = new DateTime(1970, 1, 1).Add(TimeSpan.FromSeconds(unixTime + timeOffset));
+            string formattedDateTime = newDateTime.ToString("HH:mm");
+            return formattedDateTime;
+        }
+
+        public string ToDayMonthOnly(int unixTime, int timeOffset)
+        {
+            var newDateTime = new DateTime(1970, 1, 1).Add(TimeSpan.FromSeconds(unixTime + timeOffset));
+            string formattedDateTime = newDateTime.ToString("dd-MM");
+            return formattedDateTime;
+        }
+        public string ToDayOfTheWeekOnly(int unixTime, int timeOffset)
+        {
+            var newDateTime = new DateTime(1970, 1, 1).Add(TimeSpan.FromSeconds(unixTime + timeOffset));
+            string formattedDateTime = newDateTime.ToString("dddd");
+            return formattedDateTime;
+        }
+
         public string ToDateTime(int unixTime, int timeOffset)
         {
             var newDateTime = new DateTime(1970, 1, 1).Add(TimeSpan.FromSeconds(unixTime + timeOffset));
