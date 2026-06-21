@@ -1,4 +1,3 @@
-//using Android.App.AppSearch;
 using OpenWeatherApp.Models;
 using OpenWeatherApp.Services;
 
@@ -7,8 +6,7 @@ namespace OpenWeatherApp.Views;
 public partial class SearchCitiesPage : ContentPage
 {
 	public List<Geocode> place;
-    public List<DailyWeather> weatherResult;
-    Dictionary<string, string> customWeather;
+    CurrentWeather weatherResult;
     public int searchLimit = 5;
     public SearchCitiesPage()
 	{
@@ -26,29 +24,27 @@ public partial class SearchCitiesPage : ContentPage
         WeatherApiService service = new WeatherApiService("b3aa72c0e805f0c66fae53311f9f0d47", "https://api.openweathermap.org/", "metric");
         
         place = await service.TranslateCityToGeocode(searchBar.Text, service);
-
-        weatherResult = await service.SearchDailyWeather(searchBar.Text, service, place[0]);
-        List<DailyWeather.Data> listOfWeatherResults = new();
-
+        weatherResult = await service.GetWeatherSearchResults(searchBar.Text, service, place[0]);
+        List<CurrentWeatherData> listOfWeatherResults = new();
+        weatherResult.data[0].weather[0].icon = $"{weatherResult.data[0].weather[0].icon}.png";
+        
         if (weatherResult != null && place != null)
         {
-            for (int i = 0; i < 1; i++)
-            {
-                if (weatherResult[0].data != null)
-                {
 
-                }
-            }
-            customWeather = new Dictionary<string, string> {
+            /*customWeather = new Dictionary<string, string> {
                 {"nameOfCity", place[0].name},
                 {"nameOfCountry", place[0].country},
                 {"nameOfState", place[0].state },
-                {"actualDaytimeTemp", weatherResult[0].temp.day.ToString()},
-                {"actualMinTemp", weatherResult[0].temp.min.ToString()},
-                {"actualMaxTemp", weatherResult[0].temp.max.ToString()},
-                {"feelsLikeDaytimeTemp", weatherResult[0].feels_like.day.ToString()}
-            };
+                {"actualDaytimeTemp", weatherResult.data[0].temp.day.ToString()},
+                {"actualMinTemp", weatherResult.data[0].temp.min.ToString()},
+                {"actualMaxTemp", weatherResult.data[0].temp.max.ToString()},
+                {"feelsLikeDaytimeTemp", weatherResult.data[0].feels_like.day.ToString()}
+            };*/
+            foreach (var result in weatherResult.data)
+            {
+                listOfWeatherResults.Add(result);
+            }
+            CityCollectionSearchResults.ItemsSource = listOfWeatherResults;
         }
-        CityCollectionSearchResults.ItemsSource = customWeather;
     }
 }

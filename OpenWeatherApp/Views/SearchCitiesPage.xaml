@@ -3,31 +3,66 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="OpenWeatherApp.Views.SearchCitiesPage"
              Title="SearchCitiesPage">
-    <VerticalStackLayout
-        Margin="10"
-        Padding="5">
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <SearchBar
-            Placeholder="Search city..."
-            TextChanged="SearchBar_TextChanged"
-            SearchButtonPressed="SearchBar_SearchButtonPressed"/>
-        <CollectionView x:Name="CityCollectionSearchResults">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout>
-                        <Label Text="{Binding nameOfCity}" FontAttributes="Bold" FontSize="32"/>
-                        <Label Text="{Binding nameOfCountry}" FontAttributes="Bold" FontSize="20"/>
-                        <Label Text="{Binding nameOfState}" FontAttributes="Bold" FontSize="20"/>
-                        <Label Text="{Binding actualDaytimeTemp}" FontAttributes="Bold" FontSize="20"/>
-                        <Label Text="{Binding actualMinTemp}" FontAttributes="Bold" FontSize="20"/>
-                        <Label Text="{Binding actualMaxTemp}" FontAttributes="Bold" FontSize="20"/>
-                        <Label Text="{Binding feelsLikeDaytimeTemp}" FontAttributes="Bold" FontSize="20"/>
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout
+            Margin="10"
+            Padding="5">
+            <Label 
+                Text="Welcome to .NET MAUI!"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+            <SearchBar
+                Placeholder="Search city..."
+                TextChanged="SearchBar_TextChanged"
+                SearchButtonPressed="SearchBar_SearchButtonPressed"/>
+            <CollectionView x:Name="CityCollectionSearchResults">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Image
+                                x:Name="weatherIcon"
+                                Source="{Binding weather[0].icon}"
+                                Grid.RowSpan="3"
+                                MaximumHeightRequest="50"
+                                Margin="5">
+                            </Image>
+                            <Label
+                                Grid.Column="1"
+                                Grid.Row="0"
+                                Text="Temperature today: "
+                                FontAttributes="Bold"
+                                FontSize="20"/>
+                            <Label
+                                Grid.Column="2"
+                                Grid.Row="0"
+                                Text="{Binding temp}"
+                                FontAttributes="Bold"
+                                FontSize="20"/>
+                            <Label
+                                Grid.Column="1"
+                                Grid.Row="1"
+                                Text="{Binding feels_like}"
+                                FontSize="20"/>
+                            <Label
+                                Grid.Column="1"
+                                Grid.Row="2"
+                                Text="{Binding dt}"
+                                FontSize="20"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+    
 </ContentPage>
