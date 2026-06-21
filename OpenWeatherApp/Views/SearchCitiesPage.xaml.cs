@@ -32,7 +32,7 @@ public partial class SearchCitiesPage : ContentPage
         place = await service.TranslateCityToGeocode(searchBar.Text, service);
         weatherResult = await service.GetWeatherSearchResults(searchBar.Text, service, place[0]);
 
-        weatherResult.data[0].dateTime = timeConverter.ToDateTime(weatherResult.data[0].dt);
+        weatherResult.data[0].dateTime = timeConverter.ToDateTime(weatherResult.data[0].dt, weatherResult.timezone_offset);
 
         // Change CurrentWeather items
         var iconName = weatherResult.data[0].weather[0].icon;
