@@ -8,6 +8,8 @@ public partial class HomePage : ContentPage
     string currentCityName = "Perth";
     List<Geocode> place;
     CurrentWeather weatherResult;
+    float minTemp;
+    float maxTemp;
 
     public HomePage()
 	{
@@ -24,6 +26,7 @@ public partial class HomePage : ContentPage
         //Get current location latitude & longitude
         place = await service.TranslateCityToGeocode(currentCityName, service);
         weatherResult = await service.GetWeatherSearchResults(currentCityName, service, place[0]);
+        minTemp, maxTemp = await service.GetMinAndMaxTemperatures(service, place[0]);
 
         // Change CurrentWeather items
         weatherResult.data[0].dateTime = timeConverter.ToDateTime(weatherResult.data[0].dt, weatherResult.timezone_offset);
