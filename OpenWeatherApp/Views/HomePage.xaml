@@ -61,7 +61,7 @@
                                  Color="DarkRed" />
                         <Label Grid.Row="1"
                                Grid.Column="0"
-                               Text="15.4"
+                               Text="{Binding temp}"
                                FontSize="32"
                                FontAttributes="Bold"
                                HorizontalOptions="End"
@@ -122,7 +122,7 @@
                                  Color="Red" />
                         <Label Grid.Row="4"
                                Grid.Column="0"
-                               Text="Today"
+                               Text="{Binding weather[0].description}"
                                FontAttributes="Bold"
                                HorizontalOptions="Center"
                                VerticalOptions="Center" />
