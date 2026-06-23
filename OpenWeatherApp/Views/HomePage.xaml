@@ -86,7 +86,7 @@
                                  Color="Red" />
                         <Label Grid.Row="2"
                                Grid.Column="0"
-                               Text="18°C"
+                               Text="{Binding max_temp}"
                                FontAttributes="Bold"
                                HorizontalOptions="Center"
                                VerticalOptions="Center" />
@@ -95,7 +95,7 @@
                                  Color="Orange" />
                         <Label Grid.Row="2"
                                Grid.Column="1"
-                               Text="9°C"
+                               Text="{Binding min_temp}"
                                HorizontalOptions="Center"
                                VerticalOptions="Center" />
 
