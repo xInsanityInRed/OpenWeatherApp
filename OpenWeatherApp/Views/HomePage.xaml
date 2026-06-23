@@ -4,18 +4,32 @@
              x:Class="OpenWeatherApp.Views.HomePage"
              Title="HomePage">
     <StackLayout
-        Padding="5"
-        Spacing="10">
+        Margin="20, 0"
+        Padding="5">
+        <Button
+            Margin="10"
+            Padding="10"
+            x:Name="LoadLocalWeather"
+            Text="Load Local Weather"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Clicked="LoadLocalWeather_Clicked" />
+        <BoxView Color="Transparent"
+                 HeightRequest="30"/>
         <CollectionView x:Name="HomeCollectionView">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Grid BackgroundColor="LightCoral"
+                          Padding="10, 10"
+                          >
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="2*" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="10" />
+                            <RowDefinition Height="8*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
                             <RowDefinition Height="0.5*" />
+                            <RowDefinition Height="2*" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -23,16 +37,6 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Image
-                            Source="{Binding weather[0].main}"
-                            MaximumHeightRequest="50"
-                            Grid.Row="0"
-                            Grid.Column="0"
-                            Grid.ColumnSpan="4"
-                            Grid.RowSpan="4"
-                            Margin="5"
-                            Aspect="Center"
-                            Opacity="0.5" />
 
                         <Label Grid.Row="0"
                                Grid.Column="0"
@@ -40,96 +44,87 @@
                                Text="{Binding cityName}"
                                HorizontalOptions="Center"
                                VerticalOptions="Center" />
-                        <Label Grid.Row="0"
-                               Grid.Column="2"
-                               Text="Row 0, Column 2"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center" />
-                        <Label Grid.Row="1"
+                        <Label Grid.Row="2"
                                Grid.Column="0"
                                Text="{Binding temp}"
                                FontSize="32"
                                FontAttributes="Bold"
                                HorizontalOptions="End"
-                               VerticalOptions="Center" />
-                        <Label Grid.Row="1"
+                               VerticalOptions="Start" />
+                        <Label Grid.Row="2"
                                Grid.Column="1"
                                Text="°C"
                                FontSize="32"
                                FontAttributes="Bold"
                                HorizontalOptions="Start"
-                               VerticalOptions="Center" />
-                        <Label Grid.Row="1"
+                               VerticalOptions="Start" />
+                        <Label Grid.Row="2"
                                Grid.Column="0"
                                Text="Feels like: "
                                FontSize="16"
                                FontAttributes="Bold"
                                HorizontalOptions="End"
                                VerticalOptions="End" />
-                        <Label Grid.Row="1"
+                        <Label Grid.Row="2"
                                Grid.Column="1"
                                Text="{Binding feels_like}"
                                FontSize="16"
                                FontAttributes="Bold"
                                HorizontalOptions="Start"
                                VerticalOptions="End" />
-                        <Image Grid.Row="1"
+                        <Image Grid.Row="2"
                                Grid.RowSpan="3"
                                Grid.Column="2"
                                Grid.ColumnSpan="2"
                                Source="{Binding weather[0].icon}"/>
-                        <Label Grid.Row="2"
+                        <Label Grid.Row="4"
                                Grid.Column="0"
+                               Grid.ColumnSpan="2"
                                Text="{Binding max_temp}"
                                FontAttributes="Bold"
                                HorizontalOptions="Center"
-                               VerticalOptions="Center" />
-                        <Label Grid.Row="2"
+                               VerticalOptions="End" />
+                        <Label Grid.Row="4"
                                Grid.Column="1"
                                Text="{Binding min_temp}"
                                HorizontalOptions="Center"
-                               VerticalOptions="Center" />
-                        <Label Grid.Row="3"
+                               VerticalOptions="End" />
+                        <Label Grid.Row="5"
                                Grid.Column="0"
+                               Grid.ColumnSpan="2"
                                Text="max"
                                FontAttributes="Bold"
                                HorizontalOptions="Center"
-                               VerticalOptions="Center" />
-                        <Label Grid.Row="3"
+                               VerticalOptions="Start" />
+                        <Label Grid.Row="5"
                                Grid.Column="1"
                                Text="min"
                                HorizontalOptions="Center"
-                               VerticalOptions="Center" />
-                        <Label Grid.Row="4"
+                               VerticalOptions="Start" />
+                        <Label Padding="0, 10"
+                               Grid.Row="6"
                                Grid.Column="0"
-                               Text="{Binding weather[0].description}"
+                               Text="Description: "
                                FontAttributes="Bold"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center" />
-                        <Label Grid.Row="4"
+                               HorizontalOptions="End"
+                               VerticalOptions="End" />
+                        <Label Padding="0, 10"
+                               Grid.Row="6"
                                Grid.Column="1"
-                               Text="Row 4, Column 1"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center" />
-                        <Label Grid.Row="4"
-                               Grid.Column="2"
-                               Text="Row 4, Column 2"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center" />
-                        <Label Grid.Row="4"
-                               Grid.Column="3"
-                               Text="Row 4, Column 3"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center" />
+                               Text="{Binding weather[0].description}"
+                               HorizontalOptions="Start"
+                               VerticalOptions="End" />
+
+                        <Label Padding="0, 10"
+                               Grid.Row="6"
+                               Grid.Column="4"
+                               Text="{Binding dateTime}"
+                               HorizontalTextAlignment="Center"
+                               HorizontalOptions="Start"
+                               VerticalOptions="End" />
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Button
-            x:Name="LoadLocalWeather"
-            Text="Load Local Weather"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
-            Clicked="LoadLocalWeather_Clicked" />
     </StackLayout>
 </ContentPage>
