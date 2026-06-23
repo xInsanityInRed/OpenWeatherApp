@@ -12,6 +12,7 @@
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" />
             <SearchBar
+                x:Name="CityWeatherSearchBar"
                 Placeholder="Search city..."
                 TextChanged="SearchBar_TextChanged"
                 SearchButtonPressed="SearchBar_SearchButtonPressed"/>
