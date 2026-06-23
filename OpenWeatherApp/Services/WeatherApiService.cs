@@ -43,6 +43,21 @@ namespace OpenWeatherApp.Services
             return (weather.data[0].temp.min, weather.data[0].temp.max);
         }
 
+        // Get weather alerts
+        public async Task<List<WeatherAlert>> GetWeatherAlerts(WeatherApiService service, CurrentWeather cityweather)
+        {
+            List<WeatherAlert> listOfAlerts = new();
+            for (int i = 0; i < cityweather.data[0].alerts.Count; i++)
+            {
+                string requestUrl = service.weatherApiUrl + "data/4.0/onecall/alert/" + cityweather.data[0].alerts[i] + "?appid=" + service.weatherApiKey;
+                var response = await MakeRestRequest(requestUrl);
+                WeatherAlert? alert = JsonConvert.DeserializeObject<WeatherAlert>(response);
+                alert.cityName = cityweather.data[0].cityName;
+                listOfAlerts.Add(alert);
+            }
+            return listOfAlerts;
+        }
+
         // Translate city into geocode
         public async Task<List<Geocode>> TranslateCityToGeocode(string cityName, WeatherApiService service)
         {

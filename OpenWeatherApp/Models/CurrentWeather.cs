@@ -15,6 +15,8 @@ namespace OpenWeatherApp.Models
     public class CurrentWeatherData
     {
         public string dateTime { get; set; }
+        public string new_sunrise { get; set; }
+        public string new_sunset { get; set; }
         public string cityName { get; set; }
         public int dt { get; set; }
         public int sunrise { get; set; }
@@ -33,5 +35,6 @@ namespace OpenWeatherApp.Models
         public float wind_speed { get; set; }
         public int wind_deg { get; set; }
         public float wind_gust { get; set; }
+        public List<string> alerts { get; set; }
     }
 }

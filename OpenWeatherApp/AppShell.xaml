@@ -20,10 +20,10 @@
                 Route="SearchCitiesPage" />
         </Tab>
         <Tab
-            Title="FavouriteCities">
+            Title="Sunrise/set">
             <ShellContent
-                ContentTemplate="{DataTemplate views:FavouriteCitiesPage}"
-                Route="FavouriteCitiesPage" />
+                ContentTemplate="{DataTemplate views:SunriseAndSunsetPage}"
+                Route="SunriseAndSunsetPage" />
         </Tab>
         <Tab
             Title="Settings">
