@@ -30,8 +30,8 @@ public partial class HomePage : ContentPage
 
         // Change CurrentWeather items
         weatherResult.data[0].dateTime = timeConverter.ToDateTime(weatherResult.data[0].dt, weatherResult.timezone_offset);
-
         weatherResult.data[0].cityName = $"{place[0].name}, {place[0].state}";
+        weatherResult.data[0].min_temp, weatherResult.data[0].max_temp = minTemp, maxTemp
 
         var iconName = weatherResult.data[0].weather[0].icon;
         weatherResult.data[0].weather[0].icon = convertImages.ConvertToIconFilename(iconName);
