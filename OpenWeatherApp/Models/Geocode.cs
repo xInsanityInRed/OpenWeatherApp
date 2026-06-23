@@ -16,5 +16,14 @@ namespace OpenWeatherApp.Models
         public float lon { get; set; }
         public string country { get; set; }
         public string state { get; set; }
+
+        public Geocode(string name, float lat, float lon, string country, string state)
+        {
+            this.name = name;
+            this.lat = lat;
+            this.lon = lon;
+            this.country = country;
+            this.state = state;
+        }
     }
 }
