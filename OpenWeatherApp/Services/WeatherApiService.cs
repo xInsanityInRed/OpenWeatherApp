@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -32,6 +32,15 @@ namespace OpenWeatherApp.Services
             var response = await MakeRestRequest(requestUrl);
             CurrentWeather? weather = JsonConvert.DeserializeObject<CurrentWeather>(response);
             return weather;
+        }
+
+        // Get max and min temps
+        public async Task<(float, float)> GetMinAndMaxTemperatures(WeatherApiService service, Geocode cityGeocode)
+        {
+            string requestUrl = service.weatherApiUrl + "data/4.0/onecall/" + "timeline/1day" + "?lat=" + cityGeocode.lat + "&lon=" + cityGeocode.lon + "&units=" + service.temperatureUnit + "&appid=" + service.weatherApiKey;
+            var response = await MakeRestRequest(requestUrl);
+            DailyWeather? weather = JsonConvert.DeserializeObject<DailyWeather>(response);
+            return (weather.data[0].temp.min, weather.data[0].temp.max);
         }
 
         // Translate city into geocode

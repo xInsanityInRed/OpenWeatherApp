@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -15,11 +15,14 @@ namespace OpenWeatherApp.Models
     public class CurrentWeatherData
     {
         public string dateTime { get; set; }
+        public string cityName { get; set; }
         public int dt { get; set; }
         public int sunrise { get; set; }
         public int sunset { get; set; }
         public float temp { get; set; }
         public float feels_like { get; set; }
+        public float max_temp { get; set; }
+        public float min_temp { get; set; }
         public float pressure { get; set; }
         public int humidity { get; set; }
         public float dew_point { get; set; }

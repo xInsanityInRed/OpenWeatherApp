@@ -3,248 +3,128 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="OpenWeatherApp.Views.HomePage"
              Title="HomePage">
-    <ScrollView>
-        <CollectionView x:Name="HomePageCollectionView"
-                        IsGrouped="True">
-            <CollectionView.GroupHeaderTemplate>
-                <DataTemplate>
-                    <StackLayout BackgroundColor="LightGray" Padding="5">
-                        <Label Text="{Binding Key}" FontAttributes="Bold" FontSize="Medium" />
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.GroupHeaderTemplate>
-            <CollectionView.EmptyView>
-                <ContentPage>
-                    <Label Text="Welcome to my Weather App!" />
-                </ContentPage>
-            </CollectionView.EmptyView>
-            <CollectionView.EmptyViewTemplate>
-                <DataTemplate>
-                    <Button x:Name="RefreshDataButton" Text="No data available. Tap to refresh." Clicked="RefreshDataButton_Clicked"/>
-                </DataTemplate>
-            </CollectionView.EmptyViewTemplate>
+    <StackLayout
+        Margin="20, 0"
+        Padding="5">
+        <Button
+            Margin="10"
+            Padding="10"
+            x:Name="LoadLocalWeather"
+            Text="Load Local Weather"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Clicked="LoadLocalWeather_Clicked" />
+        <BoxView Color="Transparent"
+                 HeightRequest="30"/>
+        <CollectionView x:Name="HomeCollectionView">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="2*" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="0.5*" />
-                                <RowDefinition Height="4*" />
-                                <RowDefinition Height="2*" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Image
-                                Source="{Binding weather[0].main}"
-                                MaximumHeightRequest="50"
-                                Grid.Row="0"
-                                Grid.Column="0"
-                                Grid.ColumnSpan="4"
-                                Grid.RowSpan="4"
-                                Margin="5"
-                                Aspect="Center"
-                                Opacity="0.5" />
+                    <Grid BackgroundColor="LightCoral"
+                          Padding="10, 10"
+                          >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="10" />
+                            <RowDefinition Height="8*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="0.5*" />
+                            <RowDefinition Height="2*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
 
-                            <BoxView Grid.Row="0"
-                                     Grid.Column="0"
-                                     Grid.ColumnSpan="2"
-                                     Color="Red" />
-                            <Label Grid.Row="0"
-                                   Grid.Column="0"
-                                   Grid.ColumnSpan="2"
-                                   Text="Perth, WA"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
-                            <BoxView Grid.Row="0"
-                                     Grid.Column="2"
-                                     Color="LightGreen" />
-                            <Label Grid.Row="0"
-                                   Grid.Column="2"
-                                   Text="Row 0, Column 2"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
-                            <BoxView Grid.Row="0"
-                                     Grid.Column="3"
-                                     Color="LightBlue" />
-                            <Button Grid.Row="0"
-                                   Grid.Column="3"
-                                   Text="Refresh"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               Text="{Binding cityName}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                        <Label Grid.Row="2"
+                               Grid.Column="0"
+                               Text="{Binding temp}"
+                               FontSize="32"
+                               FontAttributes="Bold"
+                               HorizontalOptions="End"
+                               VerticalOptions="Start" />
+                        <Label Grid.Row="2"
+                               Grid.Column="1"
+                               Text="°C"
+                               FontSize="32"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Start" />
+                        <Label Grid.Row="2"
+                               Grid.Column="0"
+                               Text="Feels like: "
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               HorizontalOptions="End"
+                               VerticalOptions="End" />
+                        <Label Grid.Row="2"
+                               Grid.Column="1"
+                               Text="{Binding feels_like}"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Start"
+                               VerticalOptions="End" />
+                        <Image Grid.Row="2"
+                               Grid.RowSpan="3"
+                               Grid.Column="2"
+                               Grid.ColumnSpan="2"
+                               Source="{Binding weather[0].icon}"/>
+                        <Label Grid.Row="4"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               Text="{Binding max_temp}"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"
+                               VerticalOptions="End" />
+                        <Label Grid.Row="4"
+                               Grid.Column="1"
+                               Text="{Binding min_temp}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="End" />
+                        <Label Grid.Row="5"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               Text="max"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Start" />
+                        <Label Grid.Row="5"
+                               Grid.Column="1"
+                               Text="min"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Start" />
+                        <Label Padding="0, 10"
+                               Grid.Row="6"
+                               Grid.Column="0"
+                               Text="Description: "
+                               FontAttributes="Bold"
+                               HorizontalOptions="End"
+                               VerticalOptions="End" />
+                        <Label Padding="0, 10"
+                               Grid.Row="6"
+                               Grid.Column="1"
+                               Text="{Binding weather[0].description}"
+                               HorizontalOptions="Start"
+                               VerticalOptions="End" />
 
-                            <BoxView Grid.Row="1"
-                                     Grid.Column="0"
-                                     Color="DarkRed" />
-                            <Label Grid.Row="1"
-                                   Grid.Column="0"
-                                   Text="15.4"
-                                   FontSize="32"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="End"
-                                   VerticalOptions="Center" />
-                            <BoxView Grid.Row="1"
-                                     Grid.Column="1"
-                                     Color="DarkOrange" />
-                            <Label Grid.Row="1"
-                                   Grid.Column="1"
-                                   Text="°C"
-                                   FontSize="32"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Start"
-                                   VerticalOptions="Center" />
-                            <Image Grid.Row="1"
-                                   Grid.RowSpan="3"
-                                   Grid.Column="2"
-                                   Grid.ColumnSpan="2"
-                                   Source="{Binding weather[0].icon}"/>
-
-                            <BoxView Grid.Row="2"
-                                     Color="Red" />
-                            <Label Grid.Row="2"
-                                   Grid.Column="0"
-                                   Text="18°C"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
-                            <BoxView Grid.Row="2"
-                                     Grid.Column="1"
-                                     Color="Orange" />
-                            <Label Grid.Row="2"
-                                   Grid.Column="1"
-                                   Text="9°C"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
-
-                            <BoxView Grid.Row="3"
-                                     Grid.Column="0"
-                                     Color="DarkRed" />
-                            <Label Grid.Row="3"
-                                   Grid.Column="0"
-                                   Text="max"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
-                            <BoxView Grid.Row="3"
-                                     Grid.Column="1"
-                                     Color="DarkOrange" />
-                            <Label Grid.Row="3"
-                                   Grid.Column="1"
-                                   Text="min"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
-
-                            <BoxView Grid.Row="4"
-                                     Grid.Column="0"
-                                     Color="Red" />
-                            <Label Grid.Row="4"
-                                   Grid.Column="0"
-                                   Text="Today"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
-                            <BoxView Grid.Row="4"
-                                     Grid.Column="1"
-                                     Color="Orange" />
-                            <Label Grid.Row="4"
-                                   Grid.Column="1"
-                                   Text="Row 4, Column 1"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
-                            <BoxView Grid.Row="4"
-                                     Grid.Column="2"
-                                     Color="LightGreen" />
-                            <Label Grid.Row="4"
-                                   Grid.Column="2"
-                                   Text="Row 4, Column 2"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
-                            <BoxView Grid.Row="4"
-                                     Grid.Column="3"
-                                     Color="LightBlue" />
-                            <Label Grid.Row="4"
-                                   Grid.Column="3"
-                                   Text="Row 4, Column 3"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
-
-                            <BoxView Grid.Row="5"
-                                     Grid.Column="0"
-                                     Color="DarkRed" />
-                            <Label Grid.Row="5"
-                                   Grid.Column="0"
-                                   Text="Row 5, Column 0"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
-                            <BoxView Grid.Row="5"
-                                     Grid.Column="1"
-                                     Color="DarkOrange" />
-                            <Label Grid.Row="5"
-                                   Grid.Column="1"
-                                   Text="Row 5, Column 1"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
-                            <BoxView Grid.Row="5"
-                                     Grid.Column="2"
-                                     Color="YellowGreen" />
-                            <Label Grid.Row="5"
-                                   Grid.Column="2"
-                                   Text="Row 5, Column 2"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
-                            <BoxView Grid.Row="5"
-                                     Grid.Column="3"
-                                     Color="SkyBlue" />
-                            <Label Grid.Row="5"
-                                   Grid.Column="3"
-                                   Text="Row 5, Column 3"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
-
-                            <BoxView Grid.Row="6"
-                                     Grid.Column="0"
-                                     Color="Red" />
-                            <Label Grid.Row="6"
-                                   Grid.Column="0"
-                                   Text="Row 6, Column 0"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
-                            <BoxView Grid.Row="6"
-                                     Grid.Column="1"
-                                     Color="Orange" />
-                            <Label Grid.Row="6"
-                                   Grid.Column="1"
-                                   Text="Row 6, Column 1"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
-                            <BoxView Grid.Row="6"
-                                     Grid.Column="2"
-                                     Color="LightGreen" />
-                            <Label Grid.Row="6"
-                                   Grid.Column="2"
-                                   Text="Row 6, Column 2"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
-                            <BoxView Grid.Row="6"
-                                     Grid.Column="3"
-                                     Color="LightBlue" />
-                            <Label Grid.Row="6"
-                                   Grid.Column="3"
-                                   Text="Row 6, Column 3"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
-                        </Grid>
-                    </StackLayout>
+                        <Label Padding="0, 10"
+                               Grid.Row="6"
+                               Grid.Column="4"
+                               Text="{Binding dateTime}"
+                               HorizontalTextAlignment="Center"
+                               HorizontalOptions="Start"
+                               VerticalOptions="End" />
+                    </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
-    </ScrollView>
+    </StackLayout>
 </ContentPage>
