@@ -1,7 +1,6 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using OpenWeatherApp.Models;
 using OpenWeatherApp.Services;
-using PCLStorage;
 
 namespace OpenWeatherApp.Views;
 
@@ -25,9 +24,6 @@ public partial class SearchCitiesPage : ContentPage
     private async void SearchBar_SearchButtonPressed(object sender, EventArgs e)
     {
         SearchBar searchBar = (SearchBar)sender;
-        favouriteButton.IsVisible = true;
-        favouriteButton.Text = "♡";
-
         
         UnixToUtcConverter timeConverter = new();
         SetImagesService convertImages = new();
@@ -53,44 +49,9 @@ public partial class SearchCitiesPage : ContentPage
             }
             CityCollectionSearchResults.ItemsSource = listOfWeatherResults;
         }
-    }
-
-    private async void favoriteButton_Clicked(object sender, EventArgs e)
-    {
-        favouriteButton.Text = "♥";
-        // Get city Geocode object from latest collection view item
-        if (CityCollectionSearchResults.ItemsSource != null)
-        {
-            List<CurrentWeatherData> cityData = (List<CurrentWeatherData>)CityCollectionSearchResults.ItemsSource;
-            var location = cityData[0].cityName;
-            var cityName = location.Split(",").First();
-
-            place = await service.TranslateCityToGeocode(cityName, service);
-            Geocode city = place[0];
-
-            // Convert city to JSON string and create file
-            string cityJsonData = JsonConvert.SerializeObject(city);
-
-            string folderName = "OpenWeatherAppData";
-            string favouriteCityJsonFile = "FavouriteCities.json";
-            string contentToSave = cityJsonData;
-            string loadedContent = "";
-
-            IFolder folder = PCLStorage.FileSystem.Current.LocalStorage;
-            folder = await folder.CreateFolderAsync(folderName, CreationCollisionOption.OpenIfExists);
-            IFile file = await folder.CreateFileAsync(favouriteCityJsonFile, CreationCollisionOption.OpenIfExists);
-
-            IFile openFile = await folder.GetFileAsync(favouriteCityJsonFile);
-
-            loadedContent = await openFile.ReadAllTextAsync();
-            await file.WriteAllTextAsync(loadedContent + contentToSave);
-
-        }
         else
         {
-            await DisplayAlertAsync("Error", "City cannot be saved", "OK");
+            //Do something
         }
-
-
     }
 }
