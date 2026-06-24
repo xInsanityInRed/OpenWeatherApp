@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -20,12 +20,6 @@ namespace OpenWeatherApp.Services
         {
             var newDateTime = new DateTime(1970, 1, 1).Add(TimeSpan.FromSeconds(unixTime + timeOffset));
             string formattedDateTime = newDateTime.ToString("dd-MM");
-            return formattedDateTime;
-        }
-        public string ToDayOfTheWeekOnly(int unixTime, int timeOffset)
-        {
-            var newDateTime = new DateTime(1970, 1, 1).Add(TimeSpan.FromSeconds(unixTime + timeOffset));
-            string formattedDateTime = newDateTime.ToString("dddd");
             return formattedDateTime;
         }
 
