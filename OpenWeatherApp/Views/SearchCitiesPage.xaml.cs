@@ -24,13 +24,14 @@ public partial class SearchCitiesPage : ContentPage
     private async void SearchBar_SearchButtonPressed(object sender, EventArgs e)
     {
         SearchBar searchBar = (SearchBar)sender;
-        
+        string cityQuery = (searchBar.Text).Replace(' ', '+')
+
         UnixToUtcConverter timeConverter = new();
         SetImagesService convertImages = new();
         List<CurrentWeatherData> listOfWeatherResults = new();
         
-        place = await service.TranslateCityToGeocode(searchBar.Text, service);
-        weatherResult = await service.GetWeatherSearchResults(searchBar.Text, service, place[0]);
+        place = await service.TranslateCityToGeocode(cityQuery, service);
+        weatherResult = await service.GetWeatherSearchResults(cityQuery, service, place[0]);
 
         // Change CurrentWeather items
         weatherResult.data[0].dateTime = timeConverter.ToDateTime(weatherResult.data[0].dt, weatherResult.timezone_offset);
