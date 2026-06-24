@@ -51,7 +51,7 @@ public partial class SearchCitiesPage : ContentPage
         }
         else
         {
-            //Do something
+            await DisplayAlertAsync("Error", "Did you spell the city correctly?", "OK");
         }
     }
 }
