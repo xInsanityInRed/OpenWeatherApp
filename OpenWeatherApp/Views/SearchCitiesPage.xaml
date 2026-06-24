@@ -98,17 +98,6 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <Button
-                x:Name="favouriteButton"
-                Text="♡"
-                TextColor="DimGray"
-                FontSize="32"
-                VerticalOptions="Center"
-                HorizontalOptions="Center"
-                BackgroundColor="Transparent"
-                IsVisible="False"
-                Clicked="favoriteButton_Clicked"
-                />
         </StackLayout>
     </ScrollView>
 </ContentPage>
