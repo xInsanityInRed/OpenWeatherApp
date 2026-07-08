@@ -9,7 +9,7 @@ public partial class SearchCitiesPage : ContentPage
 	public List<Geocode> place;
     CurrentWeather weatherResult;
     public int searchLimit = 5;
-    WeatherApiService service = new WeatherApiService("b3aa72c0e805f0c66fae53311f9f0d47", "https://api.openweathermap.org/", "metric");
+    string temperatureUnit;
 
     public SearchCitiesPage()
 	{
@@ -24,12 +24,14 @@ public partial class SearchCitiesPage : ContentPage
     private async void SearchBar_SearchButtonPressed(object sender, EventArgs e)
     {
         SearchBar searchBar = (SearchBar)sender;
-        string cityQuery = (searchBar.Text).Replace(' ', '+')
+        string cityQuery = (searchBar.Text).Replace(' ', '+');
 
         UnixToUtcConverter timeConverter = new();
         SetImagesService convertImages = new();
         List<CurrentWeatherData> listOfWeatherResults = new();
-        
+        temperatureUnit = WeatherApiService.GetTemperatureUnitType();
+        WeatherApiService service = new WeatherApiService("b3aa72c0e805f0c66fae53311f9f0d47", "https://api.openweathermap.org/", temperatureUnit);
+
         place = await service.TranslateCityToGeocode(cityQuery, service);
         weatherResult = await service.GetWeatherSearchResults(cityQuery, service, place[0]);
 

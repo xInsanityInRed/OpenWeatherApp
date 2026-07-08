@@ -8,7 +8,8 @@ public partial class HomePage : ContentPage
     string currentCityName = "Perth";
     List<Geocode> place;
     CurrentWeather weatherResult;
-    
+    string temperatureUnit;
+
     float minTemp;
     float maxTemp;
 
@@ -19,7 +20,8 @@ public partial class HomePage : ContentPage
 
     private async void LoadLocalWeather_Clicked(object sender, EventArgs e)
     {
-        WeatherApiService service = new WeatherApiService("b3aa72c0e805f0c66fae53311f9f0d47", "https://api.openweathermap.org/", "metric");
+        temperatureUnit = WeatherApiService.GetTemperatureUnitType();
+        WeatherApiService service = new WeatherApiService("b3aa72c0e805f0c66fae53311f9f0d47", "https://api.openweathermap.org/", temperatureUnit);
         UnixToUtcConverter timeConverter = new();
         SetImagesService convertImages = new();
         List<CurrentWeatherData> listOfWeatherResults = new();

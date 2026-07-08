@@ -14,7 +14,6 @@ namespace OpenWeatherApp.Services
     {
         private string weatherApiKey;
         public string weatherApiUrl;
-        //public string weatherTimeframe;
         public string temperatureUnit;
 
         public WeatherApiService(string apiKey, string url, string temperatureUnitsOfMeasurement)
@@ -22,7 +21,23 @@ namespace OpenWeatherApp.Services
             this.weatherApiKey = apiKey;
             this.weatherApiUrl = url;
             this.temperatureUnit = temperatureUnitsOfMeasurement;
-            //this.weatherTimeframe = timeframe;
+        }
+
+        public static string GetTemperatureUnitType()
+        {
+            bool isTemperatureTypeSet = Preferences.ContainsKey("TemperatureType");
+            
+            if (isTemperatureTypeSet)
+            {
+                string temperatureUnit = Preferences.Get("TemperatureType", "metric");
+                return temperatureUnit;
+            }
+            else
+            {
+                Preferences.Set("TemperatureType", "metric");
+                string temperatureUnit = Preferences.Get("TemperatureType", "metric");
+                return temperatureUnit;
+            }
         }
 
         // Get weather details using user's typed city

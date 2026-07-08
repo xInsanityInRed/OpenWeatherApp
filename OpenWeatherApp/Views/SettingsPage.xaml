@@ -3,10 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="OpenWeatherApp.Views.SettingsPage"
              Title="SettingsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <StackLayout>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Label
+                Text="Use Imperial instead of Metric"
+                Grid.Column="0"
+                HorizontalOptions="Start" />
+            <Switch x:Name="TemperatureTypeSwitch"
+                    Grid.Column="1"
+                    HorizontalOptions="End"
+                    Toggled="TemperatureTypeSwitch_Toggled" />
+        </Grid>
+    </StackLayout>
 </ContentPage>
