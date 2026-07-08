@@ -51,7 +51,7 @@
                                    VerticalOptions="Start" />
                             <Label Grid.Row="2"
                                    Grid.Column="1"
-                                   Text="°C"
+                                   Text="{Binding temperatureUnitOfMeasurement}"
                                    FontSize="32"
                                    FontAttributes="Bold"
                                    HorizontalOptions="Start"

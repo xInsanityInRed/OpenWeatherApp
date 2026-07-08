@@ -36,5 +36,6 @@ namespace OpenWeatherApp.Models
         public int wind_deg { get; set; }
         public float wind_gust { get; set; }
         public List<string> alerts { get; set; }
+        public string temperatureUnitOfMeasurement { get; set; }
     }
 }

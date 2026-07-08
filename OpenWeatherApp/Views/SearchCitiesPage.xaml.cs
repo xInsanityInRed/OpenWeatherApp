@@ -40,6 +40,14 @@ public partial class SearchCitiesPage : ContentPage
         weatherResult.data[0].cityName = $"{place[0].name}, {place[0].state}";
         var iconName = weatherResult.data[0].weather[0].icon;
         weatherResult.data[0].weather[0].icon = convertImages.ConvertToIconFilename(iconName);
+        if (temperatureUnit == "imperial")
+        {
+            weatherResult.data[0].temperatureUnitOfMeasurement = "°F";
+        }
+        else
+        {
+            weatherResult.data[0].temperatureUnitOfMeasurement = "°C";
+        }
 
         var weatherConditionName = weatherResult.data[0].weather[0].main;
         weatherResult.data[0].weather[0].main = convertImages.SetBackground(weatherConditionName);

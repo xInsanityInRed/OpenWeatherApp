@@ -36,6 +36,15 @@ public partial class HomePage : ContentPage
         weatherResult.data[0].cityName = $"{place[0].name}, {place[0].state}";
         weatherResult.data[0].min_temp = minTemp;
         weatherResult.data[0].max_temp = maxTemp;
+        if (temperatureUnit == "imperial")
+        {
+            weatherResult.data[0].temperatureUnitOfMeasurement = "°F";
+        }
+        else
+        {
+            weatherResult.data[0].temperatureUnitOfMeasurement = "°C";
+        }
+        
 
         var iconName = weatherResult.data[0].weather[0].icon;
         weatherResult.data[0].weather[0].icon = convertImages.ConvertToIconFilename(iconName);

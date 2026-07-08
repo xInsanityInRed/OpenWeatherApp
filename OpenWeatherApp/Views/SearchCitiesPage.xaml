@@ -52,7 +52,7 @@
                                         Padding="80,10,30,0"
                                         Grid.Column="1"
                                         Grid.Row="0"
-                                        Text="°C"
+                                        Text="{Binding temperatureUnitOfMeasurement}"
                                         TextColor="Black"
                                         FontAttributes="Bold"
                                         FontSize="32"/>
