@@ -4,6 +4,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using OpenWeatherApp.Models;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace OpenWeatherApp.Services
 {
@@ -64,6 +65,11 @@ namespace OpenWeatherApp.Services
             string geocodeUrl = service.weatherApiUrl + "geo/1.0/direct?q=" + cityName + "&limit=1&appid=" + service.weatherApiKey;
             var geocodeResponse = await MakeRestRequest(geocodeUrl);
             List<Geocode>? currentCityGeocode = JsonConvert.DeserializeObject<List<Geocode>>(geocodeResponse);
+            if (currentCityGeocode.Count == 0)
+            {
+                currentCityGeocode.Add(new Geocode { name = "Invalid", lat = 190, lon = 80, country = "Invalid", state = "Invalid" });
+                return currentCityGeocode;
+            }
             return currentCityGeocode;
         }
 
