@@ -23,6 +23,8 @@ public partial class SearchCitiesPage : ContentPage
 
     private async void SearchBar_SearchButtonPressed(object sender, EventArgs e)
     {
+        CityCollectionSearchResults.ItemsSource = null;
+
         SearchBar searchBar = (SearchBar)sender;
         string cityQuery = (searchBar.Text).Replace(' ', '+');
 
@@ -33,36 +35,37 @@ public partial class SearchCitiesPage : ContentPage
         WeatherApiService service = new WeatherApiService("b3aa72c0e805f0c66fae53311f9f0d47", "https://api.openweathermap.org/", temperatureUnit);
 
         place = await service.TranslateCityToGeocode(cityQuery, service);
-        weatherResult = await service.GetWeatherSearchResults(cityQuery, service, place[0]);
-
-        // Change CurrentWeather items
-        weatherResult.data[0].dateTime = timeConverter.ToDateTime(weatherResult.data[0].dt, weatherResult.timezone_offset);
-        weatherResult.data[0].cityName = $"{place[0].name}, {place[0].state}";
-        var iconName = weatherResult.data[0].weather[0].icon;
-        weatherResult.data[0].weather[0].icon = convertImages.ConvertToIconFilename(iconName);
-        if (temperatureUnit == "imperial")
+        if (place[0].name.Equals("Invalid"))
         {
-            weatherResult.data[0].temperatureUnitOfMeasurement = "°F";
+            await DisplayAlertAsync("Error", "Did you spell the city correctly?", "OK");
         }
         else
         {
-            weatherResult.data[0].temperatureUnitOfMeasurement = "°C";
-        }
+            weatherResult = await service.GetWeatherSearchResults(cityQuery, service, place[0]);
 
-        var weatherConditionName = weatherResult.data[0].weather[0].main;
-        weatherResult.data[0].weather[0].main = convertImages.SetBackground(weatherConditionName);
+            // Change CurrentWeather items
+            weatherResult.data[0].dateTime = timeConverter.ToDateTime(weatherResult.data[0].dt, weatherResult.timezone_offset);
+            weatherResult.data[0].cityName = $"{place[0].name}, {place[0].state}";
+            var iconName = weatherResult.data[0].weather[0].icon;
+            weatherResult.data[0].weather[0].icon = convertImages.ConvertToIconFilename(iconName);
+            if (temperatureUnit == "imperial")
+            {
+                weatherResult.data[0].temperatureUnitOfMeasurement = "°F";
+            }
+            else
+            {
+                weatherResult.data[0].temperatureUnitOfMeasurement = "°C";
+            }
 
-        if (weatherResult != null && place != null)
-        {
+            var weatherConditionName = weatherResult.data[0].weather[0].main;
+            weatherResult.data[0].weather[0].main = convertImages.SetBackground(weatherConditionName);
+
             foreach (var result in weatherResult.data)
             {
                 listOfWeatherResults.Add(result);
             }
             CityCollectionSearchResults.ItemsSource = listOfWeatherResults;
         }
-        else
-        {
-            await DisplayAlertAsync("Error", "Did you spell the city correctly?", "OK");
-        }
+        
     }
 }
